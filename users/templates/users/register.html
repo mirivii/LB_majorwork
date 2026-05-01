@@ -1,0 +1,13 @@
+{% extends 'team_managers/base.html' %}
+{% load static %}
+{% block title %}Register - Team Manager{% endblock %}
+{% block content %}
+    <h1>Register a profile</h1>
+    <form method="post">
+        {% csrf_token %}
+# The user/email/password fields #
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'users:login' %}">Login</a></p>
+{% endblock %}
