@@ -6,4 +6,6 @@ app_name = 'team_managers'
 
 urlpatterns = [
    path("", views.home, name="home"),
+   path("create/", views.create_team, name="create_a_team"),
+
 ]

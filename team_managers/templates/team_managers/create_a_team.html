@@ -1,0 +1,11 @@
+{% extends 'team_managers/base.html' %}
+{% load static %}
+{% block title %}Create a Team{% endblock %}
+
+{% block content %}
+    <h1>Team Set Up</h1>
+    <p>Enter the name of your team below.</p>
+        <button type="submit">Create Team</button>
+</form>
+<p><a href="{% url 'team_managers:home' %}">Back to interface</a></p>
+{% endblock %}

@@ -4,5 +4,17 @@
 
 {% block content %}
 <h1>Team Manager Interface</h1>
-<p>This interface is the management system.</p>
+<p>Hi, {{ user.username }}.</p>
+<p><a href="{% url 'team_managers:create_a_team' %}">Create a Team</a></p>
+
+<h2>My Teams</h2>
+{% for team in join_teams %}
+   <p>{{ team.name }}</p>
+    {% endfor %}
+    
+<h2>Teams I Coach</h2>
+{% for team in manage_teams %}
+ <p>{{ team.name }} (Code: {{ team.invite_code }})</p>
+    {% endfor %}
+
 {% endblock %}
