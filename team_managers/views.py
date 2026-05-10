@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect 
-from django.http import HttpResponse 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseForbidden 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Team 
@@ -20,7 +20,7 @@ def home(request):
 def create_team(request):
     if request.method == "POST":
         form = TeamForms(request.POST)
-        if form.is_valid: 
+        if form.is_valid(): 
             team = form.save(commit=False)
             team.admin= request.user 
             team.save()
@@ -29,3 +29,11 @@ def create_team(request):
     else:
         form= TeamForms()
     return render(request, "team_managers/create_a_team.html", {'form': form})
+
+@login_required(login_url='users:login')
+def team_details(request, team_id):
+    team = get_object_or_404(Team, id=team_id)
+    if request.user == team.admin or request.user in team.members.all():
+        return render(request, 'team_managers/team_details.html', {'team': team})
+    else: 
+        return HttpResponseForbidden("Cannot access this team. Ask your coach for the code.")

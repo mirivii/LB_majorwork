@@ -9,12 +9,24 @@
 
 <h2>My Teams</h2>
 {% for team in join_teams %}
-   <p>{{ team.name }}</p>
-    {% endfor %}
+<p>
+   <a href="{% url 'team_managers:team_details' team.id %}">
+        {{ team.name }}</p>
+   </a>
+</p>
+
+{% endfor %}
     
 <h2>Teams I Coach</h2>
 {% for team in manage_teams %}
- <p>{{ team.name }} (Code: {{ team.invite_code }})</p>
-    {% endfor %}
+ <p>
+    <a href="{% url 'team_managers:team_details' team.id %}">
+            {{ team.name }}
+    </a>
+    (Code: {{ team.invite_code }})
+ </p>
+
+
+{% endfor %}
 
 {% endblock %}

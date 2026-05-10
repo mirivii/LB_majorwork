@@ -12,7 +12,7 @@ class Team(models.Model):
     def save(self, *args, **kwargs):
         if not self.invite_code:
             self.invite_code = get_random_string(8).upper() # uppercase unique code (8 digits/letters)
-            super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
