@@ -6,8 +6,14 @@ from .models import Profile
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True, label="Email")
     first_name = forms.CharField(max_length=30, required=True)
-    surname = forms.CharField(max_length=30, required=True, label="Last name")
+    last_name = forms.CharField(max_length=30, required=True, label="Last name")
     nickname = forms.CharField(max_length=30, required=True)
+    dob = forms.DateField(
+        required=False,
+        label="Date of Birth (Optional)", #clarifying to users its optional
+        widget=forms.SelectDateWidget) # I want a calendar popup to select DOB, but I'm unsure towards what that widget is actually called
+    phone = forms.CharField(max_length=15, required=False, label="Phone (Optional)")
+
 
     class Meta:
         model = User
@@ -36,7 +42,7 @@ class UserRegistrationForm(UserCreationForm):
         user.username = email            # username mirrors email
         user.email = email
         user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['surname']
+        user.last_name = self.cleaned_data['last_name']
 
         if commit:
             user.save()
