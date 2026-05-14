@@ -1,0 +1,19 @@
+{% extends 'team_managers/base.html' %}
+
+# join a team 
+
+{% block content %}
+
+<form method="post">
+{% csrf_token %}
+<input type="text" name="invite_code", placeholder="Enter Code"> 
+
+<!-- if theres an error -->
+{% if Error %}
+    <p style="color: rgb(243, 86, 86);">{{Error}}</p>
+{% endif %}
+
+<button type="submit">Join Team</button> 
+</form>
+
+{% endblock %}

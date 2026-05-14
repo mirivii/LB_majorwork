@@ -17,7 +17,7 @@ def home(request):
 
 
 @login_required(login_url='users:login')
-def create_team(request):
+def create_a_team(request):
     if request.method == "POST":
         form = TeamForms(request.POST)
         if form.is_valid(): 
@@ -29,6 +29,21 @@ def create_team(request):
     else:
         form= TeamForms()
     return render(request, "team_managers/create_a_team.html", {'form': form})
+
+@login_required(login_url='users:login')
+def join_a_team(request):
+    if request.method == "POST":
+        code = request.POST.get("invite_code").strip().upper()
+        team = Team.objects.filter(invite_code=code).first()
+
+        if team:
+            team.members.add(request.user)
+            messages.success(request, f"Success!")
+            return redirect('team_managers:team_details', team_id=team.id)
+        # if the code doesn't match up with any in the database:
+        else: 
+            return render(request, "team_managers/join_a_team.html", {"Error": "This is not a valid code"})
+    return render(request, "team_managers/join_a_team.html")
 
 @login_required(login_url='users:login')
 def team_details(request, team_id):

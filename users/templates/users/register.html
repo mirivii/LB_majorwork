@@ -5,7 +5,7 @@
     <h1>Register a profile</h1>
     <form method="post">
         {% csrf_token %}
-# The user/email/password fields #
+<!-- The user/email/password fields, alongside the additional fields I added (first/last name, DOB, phone number) --> 
         {{ form.as_p }}
         <button type="submit">Register</button>
     </form>

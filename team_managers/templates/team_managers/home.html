@@ -7,6 +7,12 @@
 <p>Hi, {{ user.username }}.</p>
 <p><a href="{% url 'team_managers:create_a_team' %}">Create a Team</a></p>
 
+ <a href="{% url 'team_managers:join_a_team' %}"> 
+    <div class="join-box">
+        <p>Join a Team</p>
+    </div>
+</a>
+
 <h2>My Teams</h2>
 {% for team in join_teams %}
 <p>
@@ -25,7 +31,6 @@
     </a>
     (Code: {{ team.invite_code }})
  </p>
-
 
 {% endfor %}
 
