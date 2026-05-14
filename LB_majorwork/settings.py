@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# test to see if LB_majorwork is getting updated on git
 
 # Application definition
 
